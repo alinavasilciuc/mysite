@@ -1,0 +1,37 @@
+<form action = "{% url  'polls:vote'  question.id %}"  method="post">  {% csrf_token %}
+<fieldset>
+    <legend><h1> {{question.question_text}} </h1></legend>
+    {% if error_message %}  <p><strong> {{error_message}}  </strong></p>   {% endif %}
+    {% for choice in question.choice_set.all %}
+        <input type="radio", name=choice id="choice{{ forloop.counter }}" value="{{choice.id}}">
+        <label for="{{ forloop.counter }}"> {{choice.choice_text}}</label> <br/>
+    {%endfor%}
+</fieldset>
+<input type="submit" value="vote">
+</form>
+<p1> hellooo!!</p1>
+
+
+{#Comments: #}
+
+{# Django’s approach to web design is simple—keep Django logic and code separate from #}
+{#     design. It’s essential to understand that Django’s templates are not Python code #}
+{#     embedded into HTML; it’s not possible to execute Python code in a Django template. #}
+{# The logic at the template level should generally address the structuring and  #}
+{#    displaying the data it has received from the view. #}
+
+{# {% url 'some-url-name' arg1=v1 arg2=v2 %} #}
+
+{# A CSRF Token is a secret, unique and unpredictable value a server-side application #}
+{#     generates in order to protect CSRF vulnerable resources.  #}
+{# After the request is made, the server side application compares the two tokens #}
+{#     found in the user session and in the request. If the token is missing or does not  #}
+{#     match the value within the user session, the request is rejected, #}
+
+{# Whenever you create a form that alters data server-side, use method="post" #}
+
+{# When somebody selects one of the radio buttons and submits the form, it'll send #}
+{#    the POST data choice=# where # is the ID of the selected choice. #}
+
+
+{# #}
